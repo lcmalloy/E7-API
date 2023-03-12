@@ -1,17 +1,17 @@
+require('dotenv').config()
+
 const express = require("express")
 const app = express()
-const port = 3001
+const port = process.env.PORT
 const cors = require("cors")
+
+const profile = require('./routes/profile')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
-
-
-app.get("/", cors(), async(req, res) => {
-  res.send("This is working")
-})
+app.use('/profile', profile)
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`)
+  console.log(`[e7-Manager-API] Running on port: ${port}`)
 })
